@@ -1,34 +1,16 @@
-const fs = require('fs');
+const https = require('https');
 
-function readFileContents(filePath, callback) {
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      switch (err.code) {
-        case 'ENOENT':
-          callback('File not found. Please provide a valid file path.');
-          break;
-        case 'EACCES':
-          callback('Permission denied. Unable to read the file.');
-          break;
-        default:
-          callback(`An error occurred while reading the file: ${err.message}`);
-      }
-    } else {
-      callback(null, data);
-    }
-  });
+const searchTerm = process.argv[2];
+
+function fetchData(searchTerm) {
+  // TODO: Implement the Promise-based function to fetch data from the API based on the search term
+  
 }
 
-// CLI-specific logic
-if (require.main === module) {
-  const filePath = process.argv[2];
-  readFileContents(filePath, (error, data) => {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log('File contents:', data);
-    }
+fetchData(searchTerm)
+  .then((data) => {
+    // TODO: Process the retrieved data
+  })
+  .catch((error) => {
+    // TODO: Handle any errors that occur during the API request
   });
-}
-
-module.exports = { readFileContents }; // Export for testing purposes
